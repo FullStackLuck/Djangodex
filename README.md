@@ -7,7 +7,6 @@ Pokedex built on Django
 |-------|--------|
 | Project Name | DjanoDex|
 | Description |Gotta Catch em All |
-| Developers | Chedeline Viljean, Nathan Yi, Omari Archer, Calvin Harris  |
 | Live Website | N/A|
 | Repo |git@github.com:FullStackLuck/Djangodex.git,  |
 | Planning | https://miro.com/app/board/uXjVOvArU-k=/ |
