@@ -39,13 +39,6 @@ Pokedex built on Django
 ## ERD
 [Imgur](https://i.imgur.com/1LjDDqG.png)
 
-```mermaid
-flowchart LR
-  App-->Header
-  App-->MainDisplay-->Home-->AddWine
-  App-->Footer
-  MainDisplay-->Panel-->Nav
-```
 
 ## User Interface Mockups
 
