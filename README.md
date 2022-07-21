@@ -9,7 +9,7 @@ Pokedex built on Django
 | Description |Gotta Catch em All |
 | Live Website | N/A|
 | Repo |git@github.com:FullStackLuck/Djangodex.git,  |
-| Planning | https://miro.com/app/board/uXjVOvArU-k=/ |
+| Planning | https://miro.com/app/board/uXjVOvArU-k=/ , https://trello.com/b/yJDAuuP1/unit-4-project-djangodex|
 | Technologies | Jinja, CSS, Python , AWS, Netlify, Heroku, Imgur, Miro,Trello Styled-Components, Github. |
 
 ## User Stories
