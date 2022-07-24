@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse 
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
 ITEM = (
     ("Berry 1","Aguav Berry"),
@@ -45,13 +47,16 @@ class Pokemon(models.Model):
     type = models.CharField(max_length=20)
     moves = models.CharField(max_length=50)
     item = models.CharField(max_length=20)
-    #weakness = models.ManyToManyField(Weakness)
+    user = models.ForeignKey(User, on_delete=models.CASCADE) 
 
     def __str__(self):
         return self.name
     def get_absolute_url(self):
         return reverse('detail', kwargs={'pk': self.id})
 
+
+
+# Items has a OnetoMany Relationship with Pokemon
 class Items(models.Model):
   type = models.CharField(
          max_length=50,
@@ -60,26 +65,11 @@ class Items(models.Model):
                         
                         )
   name = models.CharField(
-      max_length=50,
-      choices=ITEM,
-      default=ITEM[0][0]
+         max_length=50,
+         choices=ITEM,
+         default=ITEM[0][0]
   )
-    
   def __str__(self):
     pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE)
-    return f'{self.item_display()} on {self.type}'
+    return f'{self.get_name_display()} on {self.type}'
 
-class Weakness(models.Model):
-  name = models.CharField(max_length=50)
-  type = models.CharField(max_length=20)
-  
-  def __str__(self):
-    return self.name
-
-
-class Moves(models.Model):
-  name = models.CharField(max_length=50)
-  type = models.CharField(max_length=50)
-  
-  def __str__(self):
-    return self.name
