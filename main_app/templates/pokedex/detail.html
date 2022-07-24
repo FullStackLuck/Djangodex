@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Pokemon Detail</h1>
+
+  <div class="card">
+    <div class="card-body">
+      <span class="card-header">{{ pokemon.name }}</span>
+      <p>Type: {{ pokemon.type}}</p>
+      <p>Moves: {{ pokemon.moves}}</p>
+      <p>Weakness: {{ pokemon.weakness}}</p>
+      <p>Item: {{ pokemon.item}}</p>
+    <a href="{% url 'pokemon_update' pokemon.id %}">Edit</a>
+    <a href="{% url 'pokemon_delete' pokemon.id %}">Delete</a>
+    </div>
+    <div class="col">
+      <table class="striped">
+        <thead>
+          <tr><th>Item</th><th>Type</th></tr>
+        </thead>
+        <tbody>
+          {% for items in pokemon.items_set.all %}
+            <tr>
+              <td>{{items.name}}</td>
+              <td>{{items.item_display}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+{% endblock %}
