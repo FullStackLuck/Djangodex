@@ -5,3 +5,8 @@ body{
 .card-header{
   color: red
 }
+
+.col{
+  position: relative;
+  
+}
