@@ -1,3 +1,4 @@
+from audioop import reverse
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Pokemon, Photo, Weakness, Items
@@ -14,7 +15,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 
-S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
+S3_BASE_URL = 'https://s3.us-east-1.amazonaws.com/'
 BUCKET = 'pokedex-oa'
 
 def home (request):
@@ -36,14 +37,25 @@ def pokedex_detail(request, Pokemon_id):
     
     })
 @login_required    
-def add_items(request, pokemon_id):
+def add_items(request, Pokemon_id):
   form = ItemsForm(request.POST)
  
   if form.is_valid():
     new_items = form.save(commit=False)
-    new_items.pokemon_id = pokemon_id
+    new_items.pokemon_id = Pokemon_id
     new_items.save()
-  return redirect('detail', pokemon_id=pokemon_id)
+  return redirect('detail', Pokemon_id=Pokemon_id)
+
+
+@login_required    
+def add_weakness(request, Pokemon_id):
+  form = WeaknessForm(request.POST)
+ 
+  if form.is_valid():
+    new_weakness = form.save(commit=False)
+    new_weakness.pokemon_id = Pokemon_id
+    new_weakness.save()
+  return redirect('detail', Pokemon_id=Pokemon_id)
 
 
 def signup(request):
@@ -63,7 +75,7 @@ def signup(request):
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
 
-def add_photo(request, pokemon_id):
+def add_photo(request, Pokemon_id):
     photo_file = request.FILES.get('photo-file',None)
     if photo_file:
         s3 = boto3.client('s3')
@@ -74,11 +86,11 @@ def add_photo(request, pokemon_id):
             
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
             
-            photo = Photo(url=url, pokemon_id=pokemon_id)
+            photo = Photo(url=url, Pokemon_id=Pokemon_id)
             photo.save()
         except:
             print('An error occured uploading to S3')
-    return redirect ('detail', pokemon_id= pokemon_id) 
+    return redirect ('detail', Pokemon_id= Pokemon_id) 
         
 
 
