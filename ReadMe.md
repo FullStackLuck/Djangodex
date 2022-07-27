@@ -3,9 +3,8 @@
 **Summary**
 | Field | Detail |
 |-------|--------|
-| Project Name | DjanoDex|
+| Project Name | DjangoDex|
 | Description |Gotta Catch em All |
-| Developers | Chedeline Viljean, Nathan Yi, Omari Archer, Calvin Harris  |
 | Live Website | N/A|
 | Repo |git@github.com:FullStackLuck/Djangodex.git,  |
 | Planning | https://miro.com/app/board/uXjVOvArU-k=/ |
@@ -37,13 +36,6 @@
 ## ERD
 [Imgur](https://i.imgur.com/1LjDDqG.png)
 
-```mermaid
-flowchart LR
-  App-->Header
-  App-->MainDisplay-->Home-->AddWine
-  App-->Footer
-  MainDisplay-->Panel-->Nav
-```
 
 ## User Interface Mockups
 
