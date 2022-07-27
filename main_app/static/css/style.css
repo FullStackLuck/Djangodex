@@ -1,12 +1,16 @@
 body{
-  background-color: orange;
+  background-color: #f9e1dd;
+  background-image: url('https://cdn.vox-cdn.com/thumbor/e4KRzS--UsuixA2G8TOCwJ-O024=/1400x1050/filters:format(png)/cdn.vox-cdn.com/uploads/chorus_asset/file/6839749/pokemon.0.png');
 
 }
 .card-header{
-  color: red
+  color: rgb(0, 0, 255)
 }
 
-.col{
+.login{
+  margin: auto;
   position: relative;
-  
+  width: 50%;
+  padding: 10px;
+  padding-top: 150px;
 }

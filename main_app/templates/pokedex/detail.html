@@ -7,9 +7,11 @@
     <div class="card-body">
       {{photo.url}}
       <span class="card-header">{{ pokemon.name }}</span>
+      <img src="{{ pokemon.img }}" alt=""/>
       <p>Type: {{ pokemon.type}}</p>
-      <p>Moves: {{ pokemon.moves}}</p>
-      <p>Item: {{ pokemon.item}}</p>
+      <p>ATK: {{ pokemon.attack}}</p>
+      <p>DEF: {{ pokemon.defense}}</p>
+      <p>SPATK: {{ pokemon.specialatk}}</p>
     <a href="{% url 'pokemon_update' pokemon.id %}">Edit</a>
     <a href="{% url 'pokemon_delete' pokemon.id %}">Delete</a>
     </div>

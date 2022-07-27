@@ -4,13 +4,15 @@ from django.http import HttpResponse
 from .models import Pokemon, Photo, Weakness, Items
 import uuid
 import boto3 
-from .forms import ItemsForm
-from .forms import WeaknessForm
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+#Forms
+from .forms import ItemsForm
+from .forms import WeaknessForm
 
 # Create your views here.
 
@@ -18,13 +20,18 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 S3_BASE_URL = 'https://s3.us-east-1.amazonaws.com/'
 BUCKET = 'pokedex-oa'
 
+
+@login_required 
 def home (request):
     return render(request, 'registration/login.html')
+
+def welcome(request):
+    return render(request, "welcome.html")
 
 
 @login_required 
 def pokedex_index(request):
-    pokedex= Pokemon.objects.all()
+    pokedex= Pokemon.objects.filter(user=request.user)
     return render(request, 'pokedex/index.html',{'pokedex': pokedex})
 
 @login_required 
@@ -34,8 +41,8 @@ def pokedex_detail(request, Pokemon_id):
     weakness_form = WeaknessForm()
     return render(request, 'pokedex/detail.html',{'pokemon': pokemon,
     'items_form': items_form, 'weakness_form': weakness_form
-    
     })
+
 @login_required    
 def add_items(request, Pokemon_id):
   form = ItemsForm(request.POST)
@@ -47,7 +54,10 @@ def add_items(request, Pokemon_id):
   return redirect('detail', Pokemon_id=Pokemon_id)
 
 
+<<<<<<< HEAD
 @login_required    
+=======
+>>>>>>> main
 def add_weakness(request, Pokemon_id):
   form = WeaknessForm(request.POST)
  
@@ -56,6 +66,10 @@ def add_weakness(request, Pokemon_id):
     new_weakness.pokemon_id = Pokemon_id
     new_weakness.save()
   return redirect('detail', Pokemon_id=Pokemon_id)
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 
 
 def signup(request):
@@ -69,12 +83,15 @@ def signup(request):
       return redirect('index')
     else:
       error_message = 'Invalid sign up - try again'
-  
-
+      
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
 
+<<<<<<< HEAD
+=======
+@login_required
+>>>>>>> main
 def add_photo(request, Pokemon_id):
     photo_file = request.FILES.get('photo-file',None)
     if photo_file:
@@ -90,9 +107,13 @@ def add_photo(request, Pokemon_id):
             photo.save()
         except:
             print('An error occured uploading to S3')
+<<<<<<< HEAD
     return redirect ('detail', Pokemon_id= Pokemon_id) 
+=======
+    return redirect  ('detail', Pokemon_id= Pokemon_id) 
+>>>>>>> main
         
-
+#Class Based Views
 
 class PokemonCreate(LoginRequiredMixin,CreateView):
     model = Pokemon

@@ -1,5 +1,6 @@
 from unicodedata import name
 from django.db import models
+from django.forms import CharField
 from django.urls import reverse 
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -71,7 +72,6 @@ WEAK = (
     ("Weakness 17","Steel"),
     ("Weakness 18","Fairy"), 
 )
- 
 
 #Weakness has a ManytoMany Relationship with Pokemon
 class Weakness(models.Model):
@@ -86,14 +86,30 @@ def __str__(self):
 def get_absolute_url(self):
     return reverse('weakness_detail', kwargs={'pk': self.id})
 
+class Moves(models.Model):
+    move1 = CharField(max_length=20)
+    move2 = CharField(max_length=20)
+    move3 = CharField(max_length=20)
+    move4 = CharField(max_length=20)
+    
+def __str__(self):
+    return self.name
+
+def get_absolute_url(self):
+    return reverse('moves_detail', kwargs={'pk': self.id})
+    
+    
+    
 
 class Pokemon(models.Model):
+    img= models.ImageField()
     name = models.CharField(max_length=20)
     type = models.CharField(max_length=20)
-    moves = models.CharField(max_length=50)
-    item = models.CharField(max_length=20)
-    #weakness= models.ManyToManyField(Weakness)
-    user = models.ForeignKey(User, on_delete=models.CASCADE) 
+    attack = models.IntegerField(max_length=3)
+    defense = models.IntegerField(max_length=3)
+    specialatk = models.IntegerField(max_length=3)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
 
     def __str__(self):
         return self.name
@@ -126,6 +142,7 @@ class Photo(models.Model):
     
     def __str__(self):
         return f"Photo for pokemon_id:{self.pokemon_id} @{self.url}"
+
 
 
 

@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name= 'home'),
+    path('welcome/', views.welcome,name= 'welcome'),
     path('pokedex/', views.pokedex_index, name='index'),
     path('accounts/signup/', views.signup, name='signup'), 
     path('pokedex/<int:Pokemon_id>/', views.pokedex_detail, name='detail'),
