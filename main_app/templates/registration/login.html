@@ -1,11 +1,35 @@
-{% extends 'base.html' %}
-{% block content %}
 
-<h1>Log In</h1>
+{% extends 'base.html' %}
+{%load static%}
+{% block content %}
+<div class="login">
+    <h1>Login</h1>
 <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
   {{ form.as_p }}
-  <input type="submit" class="btn" value="login">
-  <input type="hidden" name="next" value="{{ next }}">
-</form>
+    <input type="submit" class="btn" value="Login">
+    <input type="submit" name="next" value="{{ next }}">
+</form> 
+<div class="container-fluid">
+    <li class="nav-item">
+       <a class = "nav-link" href="{% url 'signup' %}">Sign Up</a></li>
+</div>
+</div>
+<img src="" alt="">
 {% endblock %}
+
+
+#f9e1dd
+
+
+
+
+
+
+
+
+
+
+
+
+

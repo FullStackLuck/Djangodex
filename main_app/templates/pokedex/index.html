@@ -4,11 +4,16 @@
 <h1>Pokedex</h1>
 
 {% for Pokemon in pokedex %}
+<img src="{{Pokemon.img}}" alt="">
 <div class="card">
   <div class="card-body">
     <a href="{% url 'detail' Pokemon.id %}">
     <div class="row">
       <span class="card-header">{{ Pokemon.name }}</span>
+      <p>Type: {{ Pokemon.type}}</p>
+      <p>ATK: {{ Pokemon.attack}}</p>
+      <p>DEF: {{ Pokemon.defense}}</p>
+      <p>SPATK: {{ Pokemon.specialatk}}</p>
     </div>
   </div>
 </div>

@@ -6,9 +6,11 @@
   <div class="card">
     <div class="card-body">
       <span class="card-header">{{ pokemon.name }}</span>
+      <img src="{{ pokemon.img }}" alt=""/>
       <p>Type: {{ pokemon.type}}</p>
-      <p>Moves: {{ pokemon.moves}}</p>
-      <p>Item: {{ pokemon.item}}</p>
+      <p>ATK: {{ pokemon.attack}}</p>
+      <p>DEF: {{ pokemon.defense}}</p>
+      <p>SPATK: {{ pokemon.specialatk}}</p>
     <a href="{% url 'pokemon_update' pokemon.id %}">Edit</a>
     <a href="{% url 'pokemon_delete' pokemon.id %}">Delete</a>
     </div>
@@ -18,7 +20,7 @@
         {{ items_form.as_p }}
         <input type="submit" class="btn" value="Add Item">
       </form>
-      <form class="weakness-form" action= "{% url 'add_items' pokemon.id %}" method="post">
+      <form class="weakness-form" action= "{% url 'add_weakness' pokemon.id %}" method="post">
         {% csrf_token %}
         {{ weakness_form.as_p }}
         <input type="submit" class="btn" value="Weakness">
