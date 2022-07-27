@@ -102,7 +102,6 @@ def get_absolute_url(self):
     
 
 class Pokemon(models.Model):
-    img= models.ImageField()
     name = models.CharField(max_length=20)
     type = models.CharField(max_length=20)
     attack = models.IntegerField(max_length=3)

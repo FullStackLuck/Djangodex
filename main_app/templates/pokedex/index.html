@@ -1,23 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-
+{%load static%}
 <h1>Pokedex</h1>
-<img class="responsive-img card-panel" src="{{photo.url}}">
 {% for Pokemon in pokedex %}
-<img src="{{Pokemon.img}}" alt="">
-<div class="card">
-  <div class="card-body">
-    <a href="{% url 'detail' Pokemon.id %}">
-    <div class="row">
-      <span class="card-header">{{ Pokemon.name }}</span>
-      <p>Type: {{ Pokemon.type}}</p>
-      <p>ATK: {{ Pokemon.attack}}</p>
-      <p>DEF: {{ Pokemon.defense}}</p>
-      <p>SPATK: {{ Pokemon.specialatk}}</p>
-    </div>
+<a href="{% url 'detail' Pokemon.id %}">
+  <div class="d-flex">
+    <div class="p-2 bg-info flex-fill"><p>
+       {{ Pokemon.name}}</p>
   </div>
-</div>
 </a>
+</div>
+    
 {% endfor %}
 
 {% endblock %}

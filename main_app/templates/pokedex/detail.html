@@ -3,19 +3,37 @@
 
 <h1>Pokemon Detail</h1>
 
-  <div class="card">
-    <div class="card-body">
-      {{photo.url}}
-      <span class="card-header">{{ pokemon.name }}</span>
-      <img src="{{ pokemon.img }}" alt=""/>
-      <p>Type: {{ pokemon.type}}</p>
-      <p>ATK: {{ pokemon.attack}}</p>
-      <p>DEF: {{ pokemon.defense}}</p>
-      <p>SPATK: {{ pokemon.specialatk}}</p>
-    <a href="{% url 'pokemon_update' pokemon.id %}">Edit</a>
-    <a href="{% url 'pokemon_delete' pokemon.id %}">Delete</a>
+      {% for photo in pokemon.photo_set.all %}
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{{photo.url}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{ pokemon.name }}</h5>
+          <p>Type: {{ pokemon.type}}</p>
+          <p>ATK: {{ pokemon.attack}}</p>
+          <p>DEF: {{ pokemon.defense}}</p>
+          <p>SPATK: {{ pokemon.specialatk}}</p>
+
+          <h1>Items</h1>
+          {% for items in pokemon.items_set.all %}
+              <p>{{items.get_name_display}}</p>
+              <p>{{items.type}}</p>
+          {% endfor %}
+
+          <a href="{% url 'pokemon_update' pokemon.id %}">Edit</a>
+          <a href="{% url 'pokemon_delete' pokemon.id %}">Delete</a>
+        </div>
+      </div>
+      {% empty %}
+        <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+      {% endfor %}
+      <form action="{% url 'add_photo' pokemon.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+        {% csrf_token %}
+        <input type="file" name="photo-file">
+        <br><br>
+        <input type="submit" class="btn" value="Upload Photo">
+    </form>
     </div>
-    <div class="col">
+    <div class="attributes">
       <form class="item-form"  action= "{% url 'add_items' pokemon.id %}" method="post">
         {% csrf_token %}
         {{ items_form.as_p }}
@@ -26,41 +44,6 @@
         {{ weakness_form.as_p }}
         <input type="submit" class="btn" value="Weakness">
       </form>
-      <thead>
-        <tr><th>Weakness</th></tr>
-      </thead>
-      <tbody>
-        {% for weakness in pokemon.weakness_set.all %}
-          <tr>
-            <td>{{weakness.name}}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-      <table class="row align-items-start">
-        <thead>
-          <tr><th>Item</th><th>Type</th></tr>
-        </thead>
-        <tbody>
-          {% for items in pokemon.items_set.all %}
-            <tr>
-              <td>{{items.get_name_display}}</td>
-              <td>{{items.type}}</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
     </div>
-    {% for photo in pokemon.photo_set.all %}
-      <img class="responsive-img card-panel" src="{{photo.url}}">
-    {% empty %}
-      <div class="card-panel teal-text center-align">No Photos Uploaded</div>
-    {% endfor %}
-    <form action="{% url 'add_photo' pokemon.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
-      {% csrf_token %}
-      <input type="file" name="photo-file">
-      <br><br>
-      <input type="submit" class="btn" value="Upload Photo">
-  </form>
   </div>
 {% endblock %}

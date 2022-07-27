@@ -32,6 +32,8 @@ def welcome(request):
 @login_required 
 def pokedex_index(request):
     pokedex= Pokemon.objects.filter(user=request.user)
+    photo=Photo.objects.first()
+    print(photo)
     return render(request, 'pokedex/index.html',{'pokedex': pokedex})
 
 @login_required 
@@ -54,10 +56,7 @@ def add_items(request, Pokemon_id):
   return redirect('detail', Pokemon_id=Pokemon_id)
 
 
-<<<<<<< HEAD
 @login_required    
-=======
->>>>>>> main
 def add_weakness(request, Pokemon_id):
   form = WeaknessForm(request.POST)
  
@@ -66,10 +65,6 @@ def add_weakness(request, Pokemon_id):
     new_weakness.pokemon_id = Pokemon_id
     new_weakness.save()
   return redirect('detail', Pokemon_id=Pokemon_id)
-<<<<<<< HEAD
-=======
-
->>>>>>> main
 
 
 def signup(request):
@@ -88,12 +83,10 @@ def signup(request):
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
 
-<<<<<<< HEAD
-=======
 @login_required
->>>>>>> main
 def add_photo(request, Pokemon_id):
     photo_file = request.FILES.get('photo-file',None)
+    print(photo_file)
     if photo_file:
         s3 = boto3.client('s3')
         key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
@@ -103,15 +96,12 @@ def add_photo(request, Pokemon_id):
             
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
             
-            photo = Photo(url=url, Pokemon_id=Pokemon_id)
+            photo = Photo(url=url, pokemon_id=Pokemon_id)
+            print(photo)
             photo.save()
         except:
             print('An error occured uploading to S3')
-<<<<<<< HEAD
-    return redirect ('detail', Pokemon_id= Pokemon_id) 
-=======
     return redirect  ('detail', Pokemon_id= Pokemon_id) 
->>>>>>> main
         
 #Class Based Views
 
