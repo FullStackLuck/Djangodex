@@ -1,9 +1,9 @@
 
 body{
-  background-color: #f9e1dd;
-  background-image: url('https://cdn.vox-cdn.com/thumbor/e4KRzS--UsuixA2G8TOCwJ-O024=/1400x1050/filters:format(png)/cdn.vox-cdn.com/uploads/chorus_asset/file/6839749/pokemon.0.png');
+  font-family: 'Pokemon Solid', sans-serif;;
+  background-color: yellow;
+  background-repeat:repeat; }
 
-}
 .card-header{
   color: rgb(0, 0, 255)
 }
@@ -32,4 +32,12 @@ body{
   margin: 10px;
   padding: 20px;
   font-size: 30px;
+}
+
+.grid-container{
+  justify-content: right;
+}
+
+.navbar navbar-expand-lg bg-light{
+  justify-content: right;
 }

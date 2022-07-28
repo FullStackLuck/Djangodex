@@ -4,11 +4,12 @@
 <h1>Sign Up</h1>
 {% if error_message %}<p class="red-text">{{ error_message }}</p>{% endif %}
 
-<form method="post" action="{% url 'signup' %}">
+<form style="position: justify;" method="post" action="{% url 'signup' %}">
     {% csrf_token %}
   {{ form.as_p }}
   <input type="submit" class="btn" value="sign up">
   <input type="hidden" name="next" value="{{ next }}">
 </form>
+<img src="https://media0.giphy.com/media/nMy8HTFQRWpudNwbxQ/giphy.gif?cid=6c09b9527djhhn957toycciupz28z6eoc46gc7134d6lev1s&rid=giphy.gif&ct=s" alt="">
 </div>
 {% endblock %}

@@ -1,23 +1,33 @@
 
 {% extends 'base.html' %}
-
+{%load static%}
 {% block content %}
+<img src="https://www.pngitem.com/pimgs/m/183-1830067_transparent-pokeballs-png-pokemon-dive-ball-png-png.png" alt="" style="height:70px; width:70px;">
+<div class="center-on-page" style="display: flex; position: relative;">
+  
+    <p>Welcome to your Djangodex Login or Signup today nd start collecting Pokemon</p>
+    
+  </div>
+<h1 style="font-size: 120px; position: relative;">DJANGODEX</h1>
 <div class="login">
     <h1>Login</h1>
+    <img src="" alt="">
 <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
      {{ form.as_p }}
-     <button><input type="submit" class="btn" value="Login"></button>
-    <input type="submit" name="next" value="{{ next }}">
-    <button><a class = "nav-link" href="{% url 'signup' %}">Sign Up</a></button>
+    <input type="submit" class="btn" value="Login">
+    <!-- <input type="submit" name="next" value="{{ next }}"> -->
+    <a style="color:black;" href="{% url 'signup' %}">Sign Up</a>
 </form> 
+<img src="https://media.giphy.com/media/NaPNZdhozIEjS/giphy.gif" alt="">
 </div>
+<img src="https://clipart.world/wp-content/uploads/2020/08/cute-pikachu-transparent.png" alt="">
 {% endblock %}
 
 
 
 
-
+{% url 'signup' %}
 
 
 

@@ -2,36 +2,30 @@
 {% block content %}
 
 <h1>Pokemon Detail</h1>
-
       {% for photo in pokemon.photo_set.all %}
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="{{photo.url}}" alt="Card image cap">
+      <div class="card" style="width: 20rem;">
+        <img class="card-img-top" ;" src="{{photo.url}}" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">{{ pokemon.name }}</h5>
           <p>Type: {{ pokemon.type}}</p>
           <p>ATK: {{ pokemon.attack}}</p>
           <p>DEF: {{ pokemon.defense}}</p>
           <p>SPATK: {{ pokemon.specialatk}}</p>
-
-          <h1>Items</h1>
-          {% for items in pokemon.items_set.all %}
-              <p>{{items.get_name_display}}</p>
-              <p>{{items.type}}</p>
-          {% endfor %}
-
           <a href="{% url 'pokemon_update' pokemon.id %}">Edit</a>
           <a href="{% url 'pokemon_delete' pokemon.id %}">Delete</a>
+          {% empty %}
+            <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+          {% endfor %}
         </div>
       </div>
-      {% empty %}
-        <div class="card-panel teal-text center-align">No Photos Uploaded</div>
-      {% endfor %}
+      <div class="grid-container">
       <form action="{% url 'add_photo' pokemon.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
         {% csrf_token %}
         <input type="file" name="photo-file">
         <br><br>
         <input type="submit" class="btn" value="Upload Photo">
     </form>
+        </div>
     </div>
     <div class="attributes">
       <form class="item-form"  action= "{% url 'add_items' pokemon.id %}" method="post">
@@ -47,3 +41,10 @@
     </div>
   </div>
 {% endblock %}
+
+
+<h1>Items</h1>
+{% for items in pokemon.items_set.all %}
+    <p>{{items.get_name_display}}</p>
+    <p>{{items.type}}</p>
+{% endfor %}
